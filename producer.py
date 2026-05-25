@@ -19,7 +19,7 @@ print(" [x] Conectado al Virtual Host '/servidores_web'. Enviando eventos...")
 payload_seguridad = {"evento": "Intento de Inyección SQL", "ip": "192.168.1.50", "estado": "BLOQUEADO"}
 channel.basic_publish(
     exchange='sec_direct_exchange',
-    routing_key='security.critical',  # Tu clave exacta
+    routing_key='security.critical',  # clave
     body=json.dumps(payload_seguridad)
 )
 print(" [✓] Mensaje Direct enviado a 'sec_direct_exchange'")
@@ -28,7 +28,7 @@ print(" [✓] Mensaje Direct enviado a 'sec_direct_exchange'")
 payload_auditoria = {"modulo": "Autenticación", "mensaje": "Usuario administrador inició sesión"}
 channel.basic_publish(
     exchange='audit_fanout_exchange',
-    routing_key='',  # Fanout no usa clave, va a todas las colas amarradas
+    routing_key='',  # no hay clave
     body=json.dumps(payload_auditoria)
 )
 print(" [✓] Mensaje Fanout enviado a 'audit_fanout_exchange'")
@@ -37,7 +37,7 @@ print(" [✓] Mensaje Fanout enviado a 'audit_fanout_exchange'")
 payload_metricas = {"servidor": "UIO-WEB-01", "componente": "CPU", "uso": "89%"}
 channel.basic_publish(
     exchange='perf_topic_exchange',
-    routing_key='quito.nodo01.cpu',  # Coincide con tu patrón quito.#
+    routing_key='quito.nodo01.cpu',  # clave
     body=json.dumps(payload_metricas)
 )
 print(" [✓] Mensaje Topic enviado a 'perf_topic_exchange'")

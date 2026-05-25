@@ -18,7 +18,7 @@ def callback_auditoria(ch, method, properties, body):
     print(f" [AUDIT - FANOUT] Registro guardado en historial: {data['mensaje']}")
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
-# Suscribirse usando los nombres EXACTOS de tus colas de la captura
+
 channel.basic_consume(queue='security_critical_queue', on_message_callback=callback_seguridad)
 channel.basic_consume(queue='audit_general_queue', on_message_callback=callback_auditoria)
 
